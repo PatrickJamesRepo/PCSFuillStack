@@ -7,7 +7,7 @@ const dotenv = require('dotenv')
 //Express Server
 const app = express();
 // Server Running on Port 3001
-// const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 
 // Cross Origin Response
 const cors = require('cors');
@@ -100,13 +100,13 @@ app.use((err, req, res, next) => {
 
 
 // Start the server in test 
-/* app.listen(PORT, () => {
+ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-*/
+
 
 /// Start the server in production
-const port = 3001;
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Server running at http://0.0.0.0:${port}/`);
-});
+// const port = 3001;
+//app.listen(port, '0.0.0.0', () => {
+//    console.log(`Server running at http://0.0.0.0:${port}/`);
+//});

@@ -45,7 +45,9 @@ const AssetsTable = () => {
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  
+  const [policyId, setPolicyId] = useState('');
+  const [assetName, setAssetName] = useState('');
+
   const POLICY_IDS = [
     { label: 'Original Collection', value: 'f96584c4fcd13cd1702c9be683400072dd1aac853431c99037a3ab1e' },
     { label: 'Halloween Collection', value: '52f53a3eb07121fcbec36dae79f76abedc6f3a877f8c8857e6c204d1' },
@@ -96,52 +98,53 @@ const handlePageChange = (pageNumber) => {
 };
 
 // Inside the fetchAssets function for the localhost:3001 test server
-/*
+
 const fetchAssets = async () => {
   setIsLoading(true);
   try {
-    // Fetch assets based on selected policy ID, current page, and page size
-    const response = await axios.get(`http://localhost:3001/api/assets/policy/${selectedPolicyId}/Original%20Collection?page=1&count=${PAGE_SIZE}`);
-    const { data } = response.data;
-    console.log('Received assets:', data);
-    setAssets(data); // Update assets state with fetched data
-    setIsLoading(false);
+      // Fetch assets based on selected policy ID, current page, and page size
+      const response = await axios.get(`http://localhost:3003/api/assets/policy/${policyId}/Original%20Collection?page=1&count=${PAGE_SIZE}`);
+      const { data } = response.data;
+      console.log('Received assets:', data);
+      setAssets(data); // Update assets state with fetched data
+      setIsLoading(false);
   } catch (error) {
-    console.error('Failed to fetch assets:', error);
-    setError('Failed to fetch assets');
-    setIsLoading(false);
+      console.error('Failed to fetch assets:', error);
+      setError('Failed to fetch assets');
+      setIsLoading(false);
   }
 };
+
 
 // Inside the useEffect hook for fetching assets
 useEffect(() => {
   console.log('Fetching assets with parameters:', { selectedPolicyId, PAGE_SIZE });
   fetchAssets();
 }, [selectedPolicyId]); // Include selectedPolicyId in the dependency array
-*/
 
-// Inside fetchAssets for api.puurrty.io production server
-const fetchAssets = async () => {
-  setIsLoading(true);
-  try {
-    const response = await axios.get(`${config.apiBaseUrl}/api/assets/policy/${selectedPolicyId}/Original%20Collection?page=1&count=${PAGE_SIZE}`);
 
-    if (response.data && 'data' in response.data) {
-      const { data } = response.data;
-      console.log('Received assets:', data);
-      setAssets(data); // Update assets state with fetched data
-    } else {
-      console.error('Response does not contain a "data" property:', response);
-      setError('Invalid response format');
-    }
+// // Inside fetchAssets for api.puurrty.io production server
+// const fetchAssets = async () => {
+//   setIsLoading(true);
+//   try {
+//     const response = await axios.get(`${config.apiBaseUrl}/api/assets/policy/${selectedPolicyId}/Original%20Collection?page=1&count=${PAGE_SIZE}`);
 
-    setIsLoading(false);
-  } catch (error) {
-    console.error('Failed to fetch assets:', error.message); // Log the error message
-    setError('Failed to fetch assets: ' + error.message); // Update error state with detailed error message
-    setIsLoading(false);
-  }
-};
+//     if (response.data && 'data' in response.data) {
+//       const { data } = response.data;
+//       console.log('Received assets:', data);
+//       setAssets(data); // Update assets state with fetched data
+//     } else {
+//       console.error('Response does not contain a "data" property:', response);
+//       setError('Invalid response format');
+//     }
+
+//     setIsLoading(false);
+//   } catch (error) {
+//     console.error('Failed to fetch assets:', error.message); // Log the error message
+//     setError('Failed to fetch assets: ' + error.message); // Update error state with detailed error message
+//     setIsLoading(false);
+//   }
+// };
 
 
 useEffect(() => {

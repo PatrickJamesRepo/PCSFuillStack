@@ -11,7 +11,7 @@ function BlockfrostData() {
     useEffect(() => {
         console.log('Fetching assets for policy ID from backend...');        
         if (policyId) {
-            axios.get(`http://localhost:3001/api/assets/policy/${POLICY_ID}`) // Updated to use POLICY_ID
+            axios.get(`http://localhost:3003/api/assets/policy/${POLICY_ID}`) // Updated to use POLICY_ID
                 .then(response => {
                     console.log('Assets fetched successfully:', JSON.stringify(response.data));
                     const newData = response.data.map(asset => ({
